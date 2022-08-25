@@ -8,13 +8,15 @@ const {Header, Content, Sider, Footer} = Layout;
 
 const Title = Typography;
 // const items = [
-//     {label: 'item 1', key: 'item-1', icon: React.createElement(LaptopOutlined)},
-//     {label: 'item 2', key: 'item-2', icon: React.createElement(NotificationOutlined)},
+//     {label: 'Dashboard', key: 'dashboard', icon: React.createElement(LaptopOutlined)},
 //     {
-//         label: 'sub menu',
-//         key: 'submenu',
+//         label: 'Manage User',
+//         key: 'manage-user',
 //         icon: React.createElement(UserOutlined),
-//         children: [{label: 'item 3', key: 'submenu-item-1'}],
+//         children: [
+//             {label: 'Add User', key: 'add-user'},
+//             {label: 'User List', key: 'user-list'},
+//         ],
 //     },
 // ];
 
@@ -31,21 +33,21 @@ const App = ({children}) => (
         <Layout>
             <Sider width={200} className="site-layout-background">
 
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="1">
                         {React.createElement(UserOutlined)}
-                        <span>Deshboard</span>
-                        <Link to="/"/>
+                        <span>Dashboard</span>
+                        <Link to="/dashboard"/>
                     </Menu.Item>
                     <Menu.Item key="2">
                         {React.createElement(LaptopOutlined)}
-                        <span>Login</span>
-                        <Link to="/dashboard"/>
+                        <span>User</span>
+                        <Link to="/user"/>
                     </Menu.Item>
                     <Menu.Item key="3">
                         {React.createElement(NotificationOutlined)}
-                        <span>User</span>
-                        <Link to="/user"/>
+                        <span>Role</span>
+                        <Link to="/role"/>
                     </Menu.Item>
                 </Menu>
 

@@ -20,12 +20,9 @@ function Login(props) {
             localStorage.setItem('isLoggedIn', true);
             localStorage.setItem('user', JSON.stringify(response['data']));
             console.log(response);
-           // props.history.push('/dashboard');
         }).catch(error => {
             setLoading(false);
-            console.log("failed");
-            // if (error.response.status === 401) setError(error.response.data.message);
-            // else setError("Something went wrong. Please try again later.");
+            setError("Something went wrong. Please try again later.");
         });
     }
     return (
@@ -82,6 +79,7 @@ function Login(props) {
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
 
+                    { error ? error : ''}
                     <Form.Item
                         wrapperCol={{
                             offset: 8,

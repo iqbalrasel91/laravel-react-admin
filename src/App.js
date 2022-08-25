@@ -7,11 +7,9 @@ import User from './Component/User/User';
 import Dashboard from './Component/Dashboard/Dashboard';
 
 
-const LoginStateCheck = (props) => {
-
+const LoginStateCheck = () => {
     //const isLoggedIn = localStorage.getItem('isLoggedIn')
-    const isLoggedIn = false;
-    console.log(isLoggedIn);
+    const isLoggedIn = true;
     return isLoggedIn ? <MainApp/> : <Login/>;
 }
 export default LoginStateCheck;
@@ -23,6 +21,7 @@ const MainApp = () => (
                 <Route path="/" element={<Login/>}/>
                 <Route exact path="/Dashboard" element={<Dashboard/>}/>
                 <Route exact path="/user" element={<User/>}/>
+                <Route exact path="/Role" element={<User/>}/>
             </Routes>
         </MainLayout>
     </Router>
