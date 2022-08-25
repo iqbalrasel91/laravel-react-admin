@@ -1,10 +1,33 @@
 import {Button, Checkbox, Form, Input} from 'antd';
-import React from 'react';
+import React, {useState} from 'react';
 import './Login.css'
+import axios from "axios";
 
-const App = () => {
+function Login(props) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
 
-
+    const handleLogin = () => {
+        setError(null);
+        setLoading(true);
+        axios.post('http://localhost/laravel-react-backend/public/api/login', {
+            email: email,
+            password: password
+        }).then(response => {
+            setLoading(false);
+            localStorage.setItem('isLoggedIn', true);
+            localStorage.setItem('user', JSON.stringify(response['data']));
+            console.log(response);
+           // props.history.push('/dashboard');
+        }).catch(error => {
+            setLoading(false);
+            console.log("failed");
+            // if (error.response.status === 401) setError(error.response.data.message);
+            // else setError("Something went wrong. Please try again later.");
+        });
+    }
     return (
         <div className="login-page">
             <div className="login-box">
@@ -23,15 +46,15 @@ const App = () => {
                     <p>Login to the Dashboard</p>
 
                     <Form.Item
-                        label="Username"
-                        name="username"
+                        label="email"
+                        name="email"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your username!',
+                                message: 'Please input your email!',
                             },
                         ]}
-                    >
+                        onChange={e => setEmail(e.target.value)}>
                         <Input/>
                     </Form.Item>
 
@@ -44,7 +67,7 @@ const App = () => {
                                 message: 'Please input your password!',
                             },
                         ]}
-                    >
+                        onChange={e => setPassword(e.target.value)}>
                         <Input.Password/>
                     </Form.Item>
 
@@ -65,7 +88,8 @@ const App = () => {
                             span: 16,
                         }}
                     >
-                        <Button type="primary" className="login-form-button" htmlType="submit">
+                        <Button type="primary" className="login-form-button" htmlType="submit"
+                                value={loading ? 'Loading...' : 'Login'} onClick={handleLogin}>
                             Submit
                         </Button>
                     </Form.Item>
@@ -73,6 +97,6 @@ const App = () => {
             </div>
         </div>
     );
-};
+}
 
-export default App;
+export default Login;
